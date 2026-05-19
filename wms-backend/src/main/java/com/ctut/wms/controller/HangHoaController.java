@@ -46,5 +46,16 @@ public class HangHoaController {
         hangHoaService.deleteHangHoa(id);
         return ResponseEntity.noContent().build();
     }
+    // 6. API Thống kê cảnh báo: GET /api/hang-hoa/canh-bao/sap-het
+    @GetMapping("/canh-bao/sap-het")
+    public ResponseEntity<List<HangHoaResponse>> getCanhBaoSapHetHang() {
+        return ResponseEntity.ok(hangHoaService.layCanhBaoSapHetHang());
+    }
+
+    // 7. API Tìm kiếm: GET /api/hang-hoa/tim-kiem?tuKhoa=iphone
+    @GetMapping("/tim-kiem")
+    public ResponseEntity<List<HangHoaResponse>> searchHangHoa(@RequestParam String tuKhoa) {
+        return ResponseEntity.ok(hangHoaService.timKiemTheoTen(tuKhoa));
+    }
 
 }

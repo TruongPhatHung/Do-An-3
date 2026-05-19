@@ -76,6 +76,21 @@ public class HangHoaService {
         }
         hangHoaRepository.deleteById(id);
     }
+    public List<HangHoaResponse> layCanhBaoSapHetHang() {
+        // Giả sử ngưỡng cảnh báo là dưới 10 sản phẩm
+        int nguongCanhBao = 10;
+
+        return hangHoaRepository.findTop5BySoLuongTonLessThanOrderBySoLuongTonAsc(nguongCanhBao)
+                .stream()
+                .map(hangHoaMapper::toResponse)
+                .collect(Collectors.toList());
+    }
+    public List<HangHoaResponse> timKiemTheoTen(String tuKhoa) {
+        return hangHoaRepository.findByTenHangContainingIgnoreCase(tuKhoa)
+                .stream()
+                .map(hangHoaMapper::toResponse)
+                .collect(Collectors.toList());
+    }
 
 
 
