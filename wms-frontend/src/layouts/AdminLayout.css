@@ -1,0 +1,275 @@
+/* =======================================
+   1. BỐ CỤC CHÍNH
+======================================= */
+.admin-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: #f4f7fe; /* Nền xám xanh sáng của trang con */
+}
+
+
+/* =======================================
+   2. SIDEBAR DARK (BÊN TRÁI)
+======================================= */
+.sidebar-dark {
+  width: 260px;
+  background-color: #21252d; 
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  border-right: 1px solid #1a1d24;
+  /* Thêm hiệu ứng trượt mượt mà (transition) */
+  transition: margin-left 0.3s ease-in-out; 
+}
+
+/* Thêm class này để kéo Sidebar giấu sang trái 260px */
+.sidebar-dark.hidden {
+  margin-left: -260px; 
+}
+
+
+
+.sidebar-profile {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #323842;
+}
+
+.sidebar-avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #1890ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+}
+
+.sidebar-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.sidebar-role {
+  font-size: 11px;
+  color: #3b82f6; /* Xanh lam sáng */
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+.menu-group-title {
+  padding: 20px 20px 10px 20px;
+  font-size: 11px;
+  color: #8b949e;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.menu-dark {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item-dark {
+  padding: 12px 20px;
+  color: #a6adb4;
+  text-decoration: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+}
+
+.menu-item-dark:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.menu-item-dark.active {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-left: 3px solid #3b82f6; /* Vạch xanh lam bên trái */
+  font-weight: 500;
+}
+
+.menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =======================================
+   3. KHUNG CHỨA NỘI DUNG VÀ HEADER
+======================================= */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.content-area-light {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* =======================================
+   4. HEADER DARK (NAVBAR TRÊN CÙNG)
+======================================= */
+.admin-header-dark {
+  height: 60px;
+  background-color: #2b303b; /* Cùng tông nhưng nhạt hơn sidebar tí */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-left, .header-center, .header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.system-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon-orange {
+  background-color: #f59e0b; /* Màu cam logo */
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-text {
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+
+.header-right {
+  gap: 20px;
+}
+
+.icon-btn.header-text-white {
+  background: none;
+  border: none;
+  color: #a6adb4;
+  cursor: pointer;
+  padding: 4px;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.icon-btn.header-text-white:hover {
+  color: #fff;
+}
+
+.badge-count-red {
+  position: absolute;
+  top: 0px;
+  right: -2px;
+  background-color: #ef4444; /* Đỏ thông báo */
+  color: white;
+  font-size: 10px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* User Info Header */
+.header-user-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 10px;
+  border-left: 1px solid #475569;
+}
+
+.header-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.header-greeting {
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+.header-greeting strong {
+  color: #fff;
+}
+
+/* Nút Đăng xuất */
+.btn-logout-red {
+  background-color: #ef4444;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-logout-red:hover {
+  background-color: #dc2626;
+}
+
+/* Dropdown Thông Báo */
+.header-icon-wrapper { position: relative; }
+.dropdown-panel {
+  position: absolute;
+  top: 40px;
+  right: -50px;
+  background: white;
+  color: #333;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  width: 250px;
+  z-index: 1000;
+}
+.dropdown-title { padding: 12px; font-weight: bold; border-bottom: 1px solid #eee; }
+.notify-item { display: flex; gap: 10px; padding: 12px; border-bottom: 1px solid #f5f5f5; align-items: center;}
+.notify-dot { width: 8px; height: 8px; background: #ef4444; border-radius: 50%; }
+.notify-msg { margin: 0; font-size: 13px; }
+.empty-text { padding: 16px; text-align: center; color: #888; font-size: 13px; }

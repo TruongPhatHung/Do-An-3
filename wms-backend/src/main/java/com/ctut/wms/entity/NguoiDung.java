@@ -33,12 +33,35 @@ public class NguoiDung implements UserDetails {
     @Column(nullable = false)
     private String role; // ADMIN, THU_KHO, KE_TOAN...
 
+    // 🟢 THÊM CỘT TRẠNG THÁI ĐỂ FIX LỖI ĐỎ Ở CONTROLLER
+    // Mặc định khi tạo tài khoản mới hoặc khởi tạo sẽ là OFFLINE
+    @Column(name = "status")
+    private String status = "OFFLINE";
+
+    // CÁC CỘT HỒ SƠ
+    @Column(name = "ngay_sinh")
+    private String ngaySinh;
+
+    @Column(name = "gioi_tinh")
+    private String gioiTinh;
+
+    @Column(name = "cmnd")
+    private String cmnd;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "avatar", columnDefinition = "TEXT")
+    private String avatar;
+
     // --- CÁC HÀM BẮT BUỘC CỦA SPRING SECURITY ---
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Chuyển role (VD: "ADMIN") thành định dạng mà Spring Security hiểu
-        return List.of(new SimpleGrantedAuthority(role));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role));
     }
 
     @Override
@@ -53,21 +76,21 @@ public class NguoiDung implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true; // Trả về true nghĩa là tài khoản không bị hết hạn
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true; // Tài khoản không bị khóa
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true; // Mật khẩu không bị hết hạn
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return true; // Tài khoản đang kích hoạt
+        return true;
     }
 }

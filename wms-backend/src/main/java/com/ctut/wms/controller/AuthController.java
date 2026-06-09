@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
@@ -32,5 +35,15 @@ public class AuthController {
             @RequestBody AuthenticationRequest request
     ) {
         return ResponseEntity.ok(authService.authenticate(request));
+    }
+
+    // 🟢 THÊM API ĐĂNG XUẤT
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(Principal principal) {
+        // Principal giúp Spring Security tự lấy username của người đang gọi API này từ cái Token JWT
+        if (principal != null) {
+            authService.logout(principal.getName());
+        }
+        return ResponseEntity.ok(Map.of("message", "Đã đăng xuất và chuyển trạng thái về OFFLINE"));
     }
 }

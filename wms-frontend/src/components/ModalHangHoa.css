@@ -1,0 +1,99 @@
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-box {
+  background: white;
+  width: 550px;
+  border-radius: 6px;
+  border: 2px solid #333; /* Viền đen đồng bộ kiến trúc */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  animation: modalSlideUp 0.3s ease-out;
+}
+
+@keyframes modalSlideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 { margin: 0; color: #333; }
+
+.close-x-btn {
+  background: none; border: none; font-size: 24px; cursor: pointer; color: #999;
+}
+.close-x-btn:hover { color: #333; }
+
+.modal-form { padding: 20px; }
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  flex: 1;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.required { color: #ff4d4f; }
+
+.form-group input, .form-group select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Hiệu ứng viền đỏ khi có lỗi dữ liệu */
+.form-group input.input-error, .form-group select.input-error {
+  border-color: #ff4d4f;
+  background-color: #fff1f0;
+}
+
+.error-text {
+  color: #ff4d4f;
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.btn-cancel {
+  background: #f5f5f5; border: 1px solid #ccc; padding: 8px 15px; border-radius: 4px; cursor: pointer;
+}
+.btn-submit {
+  background: #1890ff; color: white; border: none; padding: 8px 20px; border-radius: 4px; cursor: pointer; font-weight: bold;
+}
+.btn-submit:disabled {
+  background: #bfbfbf; cursor: not-allowed;
+}

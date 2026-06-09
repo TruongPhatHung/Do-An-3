@@ -1,0 +1,69 @@
+/* src/pages/TaoPhieuNhap.css */
+.inbound-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.info-section, .details-section {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+h3 { margin-top: 0; color: #333; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; margin-bottom: 20px; font-size: 16px; }
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+.section-header h3 { border: none; padding: 0; margin: 0; }
+
+.btn-add-row {
+  background-color: #52c41a; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold;
+}
+.btn-add-row:hover { background-color: #389e0d; }
+
+/* Dynamic Table Styles */
+.dynamic-table { width: 100%; border-collapse: collapse; }
+.dynamic-table th { background-color: #fafafa; padding: 12px; text-align: left; border-bottom: 2px solid #e8e8e8; font-size: 14px; }
+.dynamic-table td { padding: 10px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+
+.dynamic-table select, .dynamic-table input {
+  width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;
+}
+
+.text-center { text-align: center !important; }
+.text-blue { color: #1890ff; }
+
+.btn-delete-icon {
+  background: #fff1f0; color: #f5222d; border: 1px solid #ffa39e;
+  border-radius: 4px; width: 28px; height: 28px; font-size: 18px; line-height: 1;
+  cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+}
+.btn-delete-icon:hover { background: #f5222d; color: white; }
+
+.total-summary {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px dashed #e8e8e8;
+  font-size: 18px;
+}
+
+.total-amount { font-size: 24px; font-weight: bold; color: #f5222d; }

@@ -1,0 +1,254 @@
+/* Container chung */
+.account-list-wrapper {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Header */
+.al-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.al-title-group h2 {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  color: #111827;
+}
+
+.al-subtitle {
+  font-size: 13px;
+  color: #6B7280;
+}
+
+.btn-add-account {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-add-account:hover {
+  background-color: #2563eb;
+}
+
+/* Filters */
+.al-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #E5E7EB;
+  border-radius: 6px;
+  padding: 8px 12px;
+  flex: 1;
+  max-width: 350px;
+  color: #6B7280;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+}
+
+.filter-group {
+  display: flex;
+  gap: 12px;
+}
+
+.filter-select {
+  border: 1px solid #E5E7EB;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #374151;
+  outline: none;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+/* Table */
+.table-responsive {
+  overflow-x: auto;
+}
+
+.al-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.al-table th {
+  background-color: #F9FAFB;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6B7280;
+  text-transform: uppercase;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.al-table td {
+  padding: 16px;
+  font-size: 14px;
+  border-bottom: 1px solid #E5E7EB;
+  color: #111827;
+  vertical-align: middle;
+}
+
+.fw-500 { font-weight: 500; }
+.text-center { text-align: center; }
+.text-muted { color: #6B7280; }
+
+/* User Info Cell */
+.user-info-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  background-color: #E0E7FF;
+  color: #4F46E5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name { font-weight: 500; color: #111827; }
+.user-email { font-size: 12px; color: #6B7280; }
+
+/* Badges */
+.role-badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.badge-admin { background-color: #E0E7FF; color: #4338CA; } /* Xanh dương đậm */
+.badge-quanly { background-color: #D1FAE5; color: #047857; } /* Xanh lá đậm */
+.badge-nhanvien { background-color: #FEF3C7; color: #B45309; } /* Vàng cam (Thủ kho) */
+
+/* 🟢 BỔ SUNG CÁC ROLE MỚI TỪ TÀI LIỆU */
+.badge-muahang { background-color: #E0F2FE; color: #0369A1; } /* Xanh da trời (Mua hàng) */
+.badge-banhang { background-color: #FCE7F3; color: #BE185D; } /* Hồng đậm (Bán hàng) */
+.badge-ketoan { background-color: #F3E8FF; color: #7E22CE; } /* Tím (Kế toán) */
+
+.badge-user { background-color: #F3F4F6; color: #374151; } /* Xám (Khách hàng) */
+.badge-default { background-color: #E5E7EB; color: #4B5563; }
+
+/* Status */
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-active { color: #059669; }
+.status-active .status-dot { background-color: #10B981; }
+
+.status-locked { color: #DC2626; }
+.status-locked .status-dot { background-color: #EF4444; }
+
+/* Actions */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  color: #6B7280;
+  transition: all 0.2s;
+}
+
+.btn-icon:hover { background-color: #F3F4F6; }
+.btn-view:hover { color: #3B82F6; }
+.btn-edit:hover { color: #10B981; }
+
+/* Pagination */
+.al-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #E5E7EB;
+}
+
+.page-info {
+  font-size: 14px;
+  color: #374151;
+}
+
+.page-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-page {
+  background-color: white;
+  border: 1px solid #D1D5DB;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #374151;
+}
+
+.btn-page:hover:not(:disabled) {
+  background-color: #F9FAFB;
+}
+
+.btn-page:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* Thêm class này vào dưới nhóm class status hiện tại của bạn */
+.status-offline { color: #6B7280; } /* Chữ xám */
+.status-offline .status-dot { background-color: #9CA3AF; } /* Chấm xám */

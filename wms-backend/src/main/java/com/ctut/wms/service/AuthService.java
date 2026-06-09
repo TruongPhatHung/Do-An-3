@@ -12,6 +12,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -23,27 +26,31 @@ public class AuthService {
 
     // HÀM ĐĂNG KÝ
     public AuthenticationResponse register(RegisterRequest request) {
-        // 1. Tạo đối tượng Người Dùng mới
         var user = NguoiDung.builder()
                 .username(request.getUsername())
-                .password(passwordEncoder.encode(request.getPassword())) // Bắt buộc phải mã hóa mật khẩu!
+                .password(passwordEncoder.encode(request.getPassword()))
                 .hoTen(request.getHoTen())
                 .role(request.getRole())
+                .status("ACTIVE") // 🟢 Vừa đăng ký xong có thể cho ACTIVE luôn
                 .build();
 
-        // 2. Lưu vào Database
         repository.save(user);
 
-        // 3. Tạo Token cho user này và trả về
-        var jwtToken = jwtService.generateToken(user);
+        Map<String, Object> extraClaims = new HashMap<>();
+        extraClaims.put("hoTen", user.getHoTen());
+        extraClaims.put("role", user.getRole());
+
+        var jwtToken = jwtService.generateToken(extraClaims, user);
+
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .avatar(user.getAvatar())
                 .build();
     }
 
     // HÀM ĐĂNG NHẬP
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        // 1. Spring Security tự động kiểm tra username và password
+        // 1. Kiểm tra tài khoản mật khẩu
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
@@ -51,14 +58,31 @@ public class AuthService {
                 )
         );
 
-        // 2. Nếu code chạy đến đây nghĩa là mật khẩu đúng, tiến hành lấy User từ DB
+        // 2. Lấy User từ DB
         var user = repository.findByUsername(request.getUsername())
                 .orElseThrow();
 
-        // 3. Tạo Token và trả về
-        var jwtToken = jwtService.generateToken(user);
+        // 🟢 CẬP NHẬT TRẠNG THÁI ACTIVE KHI ĐĂNG NHẬP THÀNH CÔNG
+        user.setStatus("ACTIVE");
+        repository.save(user);
+
+        // 3. Tạo Token
+        Map<String, Object> extraClaims = new HashMap<>();
+        extraClaims.put("hoTen", user.getHoTen());
+        extraClaims.put("role", user.getRole());
+        var jwtToken = jwtService.generateToken(extraClaims, user);
+
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .avatar(user.getAvatar())
                 .build();
+    }
+
+    // 🟢 THÊM HÀM ĐĂNG XUẤT ĐỂ ĐỔI TRẠNG THÁI THÀNH OFFLINE
+    public void logout(String username) {
+        repository.findByUsername(username).ifPresent(user -> {
+            user.setStatus("OFFLINE");
+            repository.save(user);
+        });
     }
 }

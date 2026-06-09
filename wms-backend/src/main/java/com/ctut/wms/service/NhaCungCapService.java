@@ -2,6 +2,8 @@ package com.ctut.wms.service;
 
 import com.ctut.wms.dto.NhaCungCapRequest;
 import com.ctut.wms.dto.NhaCungCapResponse;
+import com.ctut.wms.dto.HangHoaTrongNCC; // DTO chứa MultipartFile từ React
+import com.ctut.wms.entity.HangHoaTrongNcc; // Entity lưu DB
 import com.ctut.wms.entity.NhaCungCap;
 import com.ctut.wms.mapper.NhaCungCapMapper;
 import com.ctut.wms.repository.NhaCungCapRepository;
@@ -9,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,42 +19,57 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class NhaCungCapService {
 
-    // Tiêm (Inject) Repository để giao tiếp DB và Mapper để chuyển đổi dữ liệu
     private final NhaCungCapRepository repository;
     private final NhaCungCapMapper mapper;
 
-    /**
-     * LẤY DANH SÁCH NHÀ CUNG CẤP
-     * @return Danh sách các nhà cung cấp (đã ẩn đi thông tin thừa qua DTO)
-     */
+    @Transactional(readOnly = true)
     public List<NhaCungCapResponse> getAll() {
         return repository.findAll().stream()
-                .map(mapper::toResponse) // MapStruct tự động chuyển Entity -> Response
+                .map(mapper::toResponse)
                 .collect(Collectors.toList());
     }
 
-    /**
-     * LẤY THÔNG TIN CHI TIẾT 1 NHÀ CUNG CẤP
-     */
+    @Transactional(readOnly = true)
     public NhaCungCapResponse getById(Integer id) {
-        // Tìm trong cơ sở dữ liệu, nếu không thấy sẽ bắn ra ngoại lệ
         return mapper.toResponse(repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy Nhà Cung Cấp với ID: " + id)));
     }
 
     /**
-     * THÊM MỚI NHÀ CUNG CẤP
-     * @Transactional giúp an toàn dữ liệu: Bất kỳ lỗi nào xảy ra khi đang lưu, DB sẽ hoàn tác lại trạng thái ban đầu.
+     * THÊM MỚI NHÀ CUNG CẤP (Đã sửa lỗi MapStruct không map được ảnh)
      */
     @Transactional
     public NhaCungCapResponse create(NhaCungCapRequest request) {
-        // 1. Dùng mapper chuyển DTO (từ client) sang Entity
+        // 1. Map các thông tin cơ bản (Mã NCC, Tên, Lĩnh vực, Email...)
         NhaCungCap newNcc = mapper.toEntity(request);
 
-        // 2. Lưu vào CSDL
-        NhaCungCap savedNcc = repository.save(newNcc);
+        // 2. TỰ TAY XỬ LÝ DANH SÁCH SẢN PHẨM & ẢNH (Bỏ qua MapStruct ở đoạn này)
+        if (request.getSanPhams() != null && !request.getSanPhams().isEmpty()) {
+            List<HangHoaTrongNcc> danhSachSp = new ArrayList<>();
 
-        // 3. Chuyển kết quả vừa lưu thành Response và trả về
+            for (HangHoaTrongNCC dtoSp : request.getSanPhams()) {
+                HangHoaTrongNcc entitySp = new HangHoaTrongNcc();
+                entitySp.setMaHang(dtoSp.getMaHang());
+                entitySp.setTenHang(dtoSp.getTenHang());
+                entitySp.setDonGia(dtoSp.getDonGia());
+
+                // Xử lý lấy tên file ảnh
+                if (dtoSp.getHinhAnh() != null && !dtoSp.getHinhAnh().isEmpty()) {
+                    String fileName = dtoSp.getHinhAnh().getOriginalFilename();
+                    entitySp.setHinhAnh(fileName);
+                    // (Tương lai bạn có thể thêm code copy file vào thư mục tĩnh của server ở đây)
+                }
+
+                // Gắn quan hệ với Nhà cung cấp
+                entitySp.setNhaCungCap(newNcc);
+                danhSachSp.add(entitySp);
+            }
+            // Gán lại danh sách đã chuẩn bị hoàn chỉnh vào NCC
+            newNcc.setSanPhams(danhSachSp);
+        }
+
+        // 3. Lưu vào CSDL
+        NhaCungCap savedNcc = repository.save(newNcc);
         return mapper.toResponse(savedNcc);
     }
 
@@ -60,23 +78,40 @@ public class NhaCungCapService {
      */
     @Transactional
     public NhaCungCapResponse update(Integer id, NhaCungCapRequest request) {
-        // 1. Tìm xem nhà cung cấp có tồn tại không
         NhaCungCap existingNcc = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy Nhà Cung Cấp với ID: " + id));
 
-        // 2. MapStruct sẽ tự động lấy thông tin từ request và đè lên existingNcc
+        // Xóa danh sách cũ
+        if (existingNcc.getSanPhams() != null) {
+            existingNcc.getSanPhams().clear();
+        }
+
         mapper.updateEntityFromRequest(request, existingNcc);
 
-        // 3. Lưu bản cập nhật và trả về kết quả
+        // Tạo lại danh sách mới y như hàm Create
+        if (request.getSanPhams() != null && !request.getSanPhams().isEmpty()) {
+            List<HangHoaTrongNcc> danhSachSpMoi = new ArrayList<>();
+            for (HangHoaTrongNCC dtoSp : request.getSanPhams()) {
+                HangHoaTrongNcc entitySp = new HangHoaTrongNcc();
+                entitySp.setMaHang(dtoSp.getMaHang());
+                entitySp.setTenHang(dtoSp.getTenHang());
+                entitySp.setDonGia(dtoSp.getDonGia());
+
+                if (dtoSp.getHinhAnh() != null && !dtoSp.getHinhAnh().isEmpty()) {
+                    entitySp.setHinhAnh(dtoSp.getHinhAnh().getOriginalFilename());
+                }
+
+                entitySp.setNhaCungCap(existingNcc);
+                danhSachSpMoi.add(entitySp);
+            }
+            existingNcc.getSanPhams().addAll(danhSachSpMoi);
+        }
+
         return mapper.toResponse(repository.save(existingNcc));
     }
 
-    /**
-     * XÓA NHÀ CUNG CẤP
-     */
     @Transactional
     public void delete(Integer id) {
-        // Xóa cứng khỏi CSDL dựa vào ID
         repository.deleteById(id);
     }
 }

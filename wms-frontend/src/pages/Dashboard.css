@@ -1,0 +1,136 @@
+/* src/pages/Dashboard.css */
+.dashboard-root {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.loading-container {
+  padding: 100px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #666;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  background: white;
+  padding: 15px 20px;
+  border-radius: 6px;
+  border: 1px solid #e8e8e8;
+}
+.dashboard-header h2 { margin: 0; font-size: 20px; color: #1f1f1f; }
+.dashboard-header .subtitle { margin: 5px 0 0 0; color: #8c8c8c; font-size: 13px; }
+
+.btn-print-action {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn-print-action:hover { background-color: #555; }
+
+/* Thẻ thống kê */
+.summary-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 25px;
+}
+.card-item {
+  background: white;
+  padding: 20px;
+  border-radius: 6px;
+  border: 1px solid #e8e8e8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+.card-label { font-size: 12px; font-weight: bold; color: #8c8c8c; text-transform: uppercase; }
+.card-num { font-size: 24px; font-weight: bold; margin-top: 5px; display: block; color: #262626; }
+.card-icon { font-size: 32px; opacity: 0.8; }
+
+.card-finance { border-top: 4px solid #333; }
+.card-alert { border-top: 4px solid #f5222d; }
+.card-inbound { border-top: 4px solid #1890ff; }
+.card-outbound { border-top: 4px solid #52c41a; }
+
+/* Biểu đồ chính */
+.dashboard-main-chart {
+  background: white;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+.chart-card-header h3 { margin-top: 0; font-size: 15px; color: #434343; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0; }
+.chart-body-wrapper { margin-top: 20px; height: 320px; }
+.empty-chart-msg { text-align: center; color: #bfbfbf; padding-top: 100px; font-style: italic; }
+
+/* Layout Grid hàng dưới */
+.dashboard-twin-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.twin-box {
+  background: white;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  padding: 20px;
+}
+.twin-box h3 { margin-top: 0; font-size: 15px; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px; margin-bottom: 15px; color: #434343; }
+.border-top-red { border-top: 3px solid #f5222d; }
+
+/* Bảng biểu thu nhỏ trên Dashboard */
+.mini-dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.mini-dashboard-table th { background-color: #fafafa; padding: 10px; font-size: 13px; text-align: left; border-bottom: 1px solid #f0f0f0; color: #595959; }
+.mini-dashboard-table td { padding: 10px; font-size: 13px; border-bottom: 1px solid #f0f0f0; }
+
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+.text-blue { color: #1890ff; font-weight: bold; }
+.text-green { color: #52c41a; font-weight: bold; }
+.text-red { color: #f5222d; font-weight: bold; }
+
+.row-danger-bg { background-color: #fff1f0; }
+.danger-badge { background-color: #ff4d4f; color: white; padding: 2px 6px; font-size: 11px; font-weight: bold; border-radius: 4px; }
+
+/* =========================================================
+   CẤU HÌNH IN ĐỒ ÁN CHUYÊN NGHIỆP (PRINT MEDIA QUERY)
+============================================================ */
+@media print {
+  /* Ẩn toàn bộ các thành phần như Sidebar điều hướng, nút bấm, header dư thừa */
+  .no-print, .sidebar-container, .header-global-container, button, .btn-print-action {
+    display: none !important;
+  }
+  
+  /* Căn chỉnh lại vùng nội dung chiếm 100% độ rộng giấy */
+  body, .main-layout-container, .dashboard-root {
+    background: white !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+  
+  .dashboard-twin-grid {
+    grid-template-columns: 1fr !important; /* Khi in chuyển sang bố cục dọc xếp chồng lên nhau */
+    gap: 30px;
+  }
+  
+  .card-item, .dashboard-main-chart, .twin-box {
+    box-shadow: none !important;
+    border: 1px solid #333 !important; /* Đậm nét viền khi in ra giấy */
+    page-break-inside: avoid; /* Tránh việc bảng bị cắt đôi khi sang trang giấy mới */
+  }
+}

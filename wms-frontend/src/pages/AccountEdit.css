@@ -1,0 +1,215 @@
+.edit-container {
+  padding: 10px;
+  font-family: sans-serif;
+}
+
+.edit-card {
+  display: flex;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  margin-top: 15px;
+  min-height: 500px;
+}
+
+/* Sidebar trái */
+.edit-sidebar {
+  width: 250px;
+  border-right: 1px solid #E5E7EB;
+  padding: 24px;
+}
+
+.edit-sidebar h3 {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #111827;
+}
+
+.edit-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.edit-menu li {
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  color: #4B5563;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.edit-menu li:hover {
+  background-color: #F3F4F6;
+}
+
+.edit-menu li.active {
+  background-color: #EFF6FF;
+  color: #2563EB;
+}
+
+/* Nội dung form bên phải */
+.edit-content {
+  flex: 1;
+  padding: 30px 40px;
+}
+
+.edit-content h4 {
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #E5E7EB;
+  padding-bottom: 12px;
+}
+
+.avatar-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.avatar-circle {
+  width: 80px;
+  height: 80px;
+  background: #E0E7FF;
+  color: #4F46E5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.btn-upload {
+  padding: 8px 16px;
+  border: 1px solid #D1D5DB;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mt-3 {
+  margin-top: 20px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"] {
+  padding: 10px 12px;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: #3B82F6;
+}
+
+.readonly-input {
+  background-color: #F3F4F6;
+  color: #6B7280;
+  cursor: not-allowed;
+}
+
+.radio-group {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  height: 40px;
+}
+
+.form-actions {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-save {
+  background-color: #3B82F6;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-save:hover {
+  background-color: #2563EB;
+}
+/* ==========================================================================
+   CSS CHO TOGGLE TOAST NOTIFICATION (HIỂN THỊ CẬP NHẬT THÀNH CÔNG)
+   ========================================================================== */
+.toast-notification {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #059669; /* Màu xanh lá chuẩn Admin Dashboard */
+  color: #ffffff;
+  padding: 14px 24px;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  z-index: 9999;
+  font-weight: 500;
+  font-size: 15px;
+  
+  /* Tạo animation khi xuất hiện */
+  animation: toastSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Trường hợp báo lỗi */
+.toast-notification.error {
+  background-color: #DC2626; /* Màu đỏ */
+}
+
+/* Vòng tròn icon của Toast */
+.toast-icon-wrapper {
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* Hiệu ứng trượt từ bên phải màn hình bay vào */
+@keyframes toastSlideIn {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

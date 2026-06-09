@@ -1,0 +1,162 @@
+.lendon-container {
+  background: #fdfdfd;
+  padding: 10px;
+}
+
+/* Tabs Header Thiết Kế Phẳng Chuyên Nghiệp */
+.tabs-header {
+  display: flex;
+  gap: 5px;
+  border-bottom: 2px solid #333; /* Đồng bộ viền đen kiến trúc */
+  margin-bottom: 25px;
+}
+
+.tab-button {
+  padding: 12px 25px;
+  font-size: 15px;
+  font-weight: bold;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #666;
+}
+
+.tab-button:hover {
+  background: #e0e0e0;
+}
+
+.tab-button.active-tab {
+  background: #333;
+  color: #fff;
+  border-color: #333;
+}
+
+/* Khung nội dung */
+.section-box {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.section-box h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #222;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.grid-2-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-item label {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.red-star { color: #f5222d; }
+
+.form-item select, .form-item input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.flex-space {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.add-row-btn {
+  background: #52c41a; color: white; border: none; padding: 6px 15px; border-radius: 4px; font-weight: bold; cursor: pointer;
+}
+.add-row-btn:hover { background: #389e0d; }
+
+/* Bảng tính toán */
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.order-table th {
+  background: #f5f5f5; padding: 12px; text-align: left; font-size: 14px; border-bottom: 2px solid #ddd;
+}
+
+.order-table td {
+  padding: 10px; border-bottom: 1px solid #eee;
+}
+
+.order-table select, .order-table input {
+  width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;
+}
+
+.border-red {
+  border-color: #f5222d !important;
+  background-color: #fff1f0;
+}
+
+.alert-text {
+  color: #f5222d; font-size: 11px; margin-top: 4px; font-weight: bold;
+}
+
+.text-right { text-align: right; }
+.text-bold { font-weight: bold; }
+
+.del-btn {
+  background: #fff1f0; color: #f5222d; border: 1px solid #ffa39e; border-radius: 4px; width: 30px; height: 30px; cursor: pointer; font-size: 16px;
+}
+.del-btn:hover { background: #f5222d; color: white; }
+
+/* Thanh tổng tiền */
+.total-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.price-tag { font-size: 22px; color: #1890ff; }
+.price-tag.red-price { color: #f5222d; }
+
+/* Thanh nút xác nhận */
+.action-bar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submit-main-btn {
+  padding: 12px 30px; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; color: white; cursor: pointer;
+}
+.btn-blue { background: #1890ff; }
+.btn-blue:hover { background: #096dd9; }
+.btn-orange { background: #fa8c16; }
+.btn-orange:hover { background: #d46b08; }
+
+/* Animation hiệu ứng chuyển đổi mượt */
+.fade-in {
+  animation: fadeInEffect 0.3s ease-in-out;
+}
+@keyframes fadeInEffect {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}

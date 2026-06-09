@@ -1,0 +1,65 @@
+/* src/index.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  background-color: #f4f6f9;
+  color: #333333;
+  overflow-x: hidden;
+}
+
+/* Thanh cuộn siêu mảnh cho các bảng trong kho */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+button {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+button:active {
+  transform: scale(0.97);
+}
+
+input, select, textarea {
+  outline: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+}
+input:focus, select:focus {
+  border-color: #1890ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+/* Định dạng mã hàng, mã phiếu */
+code {
+  font-family: monospace;
+  background-color: #fff0f6;
+  color: #eb2f96;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid #ffadd2;
+}

@@ -15,7 +15,7 @@ public class HangHoa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column (name = "ma_hang", nullable = false, unique = true)
+    @Column(name = "ma_hang", nullable = false, unique = true)
     private String maHang;
 
     @Column(name = "ten_hang", nullable = false)
@@ -23,6 +23,7 @@ public class HangHoa {
 
     @Column(name = "so_luong_ton", nullable = false)
     private Integer soLuongTon;
+
     @Version
     private Long version;
 

@@ -7,12 +7,13 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping
 @RestController
+@RequestMapping("/api/hang-hoa") // SỬA LỖI 1: Bổ sung đường dẫn gốc cho toàn bộ Controller
 @RequiredArgsConstructor
 public class HangHoaController {
     private final HangHoaService hangHoaService;
@@ -28,12 +29,14 @@ public class HangHoaController {
     public ResponseEntity<HangHoaResponse> getHangHoaById(@PathVariable Integer id){
         return ResponseEntity.ok(hangHoaService.getHangHoaById(id));
     }
+
     // 3. THÊM MỚI (POST /api/hang-hoa)
     @PostMapping
     public ResponseEntity<HangHoaResponse> createHangHoa(@Valid @RequestBody HangHoaRequest request){
         HangHoaResponse response = hangHoaService.createHangHoa(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
     // 4. CẬP NHẬT (PUT /api/hang-hoa/{id})
     @PutMapping("/{id}")
     public ResponseEntity<HangHoaResponse> updateHangHoa(@PathVariable Integer id, @Valid @RequestBody HangHoaRequest request){
@@ -46,8 +49,11 @@ public class HangHoaController {
         hangHoaService.deleteHangHoa(id);
         return ResponseEntity.noContent().build();
     }
-    // 6. API Thống kê cảnh báo: GET /api/hang-hoa/canh-bao/sap-het
-    @GetMapping("/canh-bao/sap-het")
+
+    // 6. API Thống kê cảnh báo: GET /api/hang-hoa/canh-bao-ton
+    // SỬA LỖI 2: Đổi "/canh-bao/sap-het" thành "/canh-bao-ton" cho khớp 100% với ReactJS
+    @GetMapping("/canh-bao-ton")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('QUANLYKHO')") // Khuyên dùng: Chặn luôn quyền chỉ cho Admin/Quản lý xem
     public ResponseEntity<List<HangHoaResponse>> getCanhBaoSapHetHang() {
         return ResponseEntity.ok(hangHoaService.layCanhBaoSapHetHang());
     }
@@ -57,5 +63,4 @@ public class HangHoaController {
     public ResponseEntity<List<HangHoaResponse>> searchHangHoa(@RequestParam String tuKhoa) {
         return ResponseEntity.ok(hangHoaService.timKiemTheoTen(tuKhoa));
     }
-
 }
